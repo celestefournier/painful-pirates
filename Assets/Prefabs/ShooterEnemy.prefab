@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2711673772258583503}
   - component: {fileID: 2711673772258583502}
   - component: {fileID: 2711673772258583489}
+  - component: {fileID: 2111510502738778635}
   - component: {fileID: 2711673772258583488}
   m_Layer: 0
   m_Name: ShooterEnemy
@@ -131,6 +132,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.535764, y: 1.0724776}
   m_EdgeRadius: 0
+--- !u!58 &2111510502738778635
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711673772258583491}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2
 --- !u!114 &2711673772258583488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,5 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17621b0f61d8754185ac13c92dce515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 8806333903268268715, guid: 4dd514a5af13f9847907b477a37f0a42, type: 3}
   speed: 1.5
   rotationSpeed: 60
+  canMove: 1

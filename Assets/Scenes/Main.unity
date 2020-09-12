@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &141803912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2423688714201052813, guid: 9a18383ccca03654faaf89841a441cae,
+    type: 3}
+  m_PrefabInstance: {fileID: 2423688714070836837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +286,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2711673772258583488, guid: 385ae8757e31cfd4f9ab8f64efea9bd9,
+        type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711673772258583488, guid: 385ae8757e31cfd4f9ab8f64efea9bd9,
+        type: 3}
+      propertyPath: malucao
+      value: 
+      objectReference: {fileID: 141803912}
     - target: {fileID: 2711673772258583491, guid: 385ae8757e31cfd4f9ab8f64efea9bd9,
         type: 3}
       propertyPath: m_Name
@@ -288,7 +304,7 @@ PrefabInstance:
     - target: {fileID: 2711673772258583500, guid: 385ae8757e31cfd4f9ab8f64efea9bd9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 5.08
       objectReference: {fileID: 0}
     - target: {fileID: 2711673772258583500, guid: 385ae8757e31cfd4f9ab8f64efea9bd9,
         type: 3}
