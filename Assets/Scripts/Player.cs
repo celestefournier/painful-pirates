@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
   public float speed = 2;
-  public float rotationSpeed = 50;
+  public float rotationSpeed = 60;
   public GameObject bullet;
   public Transform spawnFrontalShoot;
   public Transform[] spawnLeftShoot;
