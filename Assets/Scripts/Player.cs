@@ -5,14 +5,19 @@ public class Player : MonoBehaviour {
   public float speed = 2;
   public float rotationSpeed = 60;
   public GameObject bullet;
+  public GameObject healthBar;
+  public Transform playerGroup;
   public Transform spawnFrontalShoot;
   public Transform[] spawnLeftShoot;
   public Transform[] spawnRightShoot;
 
   Rigidbody2D rb;
+  int health = 100;
+  Vector3 healthBarPos;
 
   void Start() {
     rb = GetComponent<Rigidbody2D>();
+    healthBarPos = healthBar.transform.position;
   }
 
   void Update() {
@@ -31,6 +36,8 @@ public class Player : MonoBehaviour {
         Space.World
       );
     }
+
+    healthBar.transform.position = transform.position + healthBarPos;
   }
 
   void Shoot() {

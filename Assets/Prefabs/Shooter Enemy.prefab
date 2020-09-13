@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2111510502738778635}
   - component: {fileID: 2711673772258583488}
   m_Layer: 0
-  m_Name: ShooterEnemy
+  m_Name: Shooter Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,5 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 8806333903268268715, guid: 4dd514a5af13f9847907b477a37f0a42, type: 3}
   speed: 1.5
+  shootSpeed: 1
   rotationSpeed: 60
   canMove: 1
+  player: {fileID: 0}
