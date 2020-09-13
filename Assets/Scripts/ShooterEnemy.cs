@@ -2,21 +2,25 @@ using System.Collections;
 using UnityEngine;
 
 public class ShooterEnemy : MonoBehaviour {
-  public GameObject bullet;
+  public bool canMove = true;
   public float speed = 1.5f;
   public float shootSpeed = 1;
   public float rotationSpeed = 60;
-  public bool canMove = true;
-  public GameObject player;
+  public GameObject healthBar;
+  public GameObject bullet;
 
   Rigidbody2D rb;
-  Vector3 rotatePosition;
+  Transform player;
   Coroutine shootCoroutine;
+  Vector3 rotatePosition;
+  Vector3 healthBarPos;
   bool followPlayer;
 
   void Start() {
     rb = GetComponent<Rigidbody2D>();
     StartCoroutine(RandomRotate());
+    healthBarPos = healthBar.transform.localPosition;
+    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   void Update() {
@@ -27,13 +31,13 @@ public class ShooterEnemy : MonoBehaviour {
 
   void Movement() {
     if (followPlayer) {
-      float distance = Vector2.Distance(transform.position, player.transform.position);
-      
+      float distance = Vector2.Distance(transform.position, player.position);
+
       if (distance > 3) {
         rb.velocity = transform.up * speed;
       }
 
-      Vector2 diff = transform.position - player.transform.position;
+      Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;
       transform.rotation = Quaternion.Euler(0, 0, angle);
     }
@@ -41,6 +45,8 @@ public class ShooterEnemy : MonoBehaviour {
       rb.velocity = transform.up * speed;
       transform.Rotate(rotatePosition * rotationSpeed * Time.deltaTime, Space.World);
     }
+
+    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   IEnumerator RandomRotate() {
@@ -61,9 +67,9 @@ public class ShooterEnemy : MonoBehaviour {
     }
   }
 
-  IEnumerator Shoot(GameObject player) {
+  IEnumerator Shoot() {
     while (canMove) {
-      Vector2 diff = transform.position - player.transform.position;
+      Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;
       Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
 
@@ -73,15 +79,9 @@ public class ShooterEnemy : MonoBehaviour {
 
   void OnTriggerEnter2D(Collider2D other) {
     if (other.gameObject.tag == "Player") {
-      shootCoroutine = StartCoroutine(Shoot(other.gameObject));
+      player = other.gameObject.transform;
+      shootCoroutine = StartCoroutine(Shoot());
       followPlayer = true;
-    }
-  }
-
-  void OnTriggerExit2D(Collider2D other) {
-    if (other.gameObject.tag == "Player") {
-      StopCoroutine(shootCoroutine);
-      followPlayer = false;
     }
   }
 }

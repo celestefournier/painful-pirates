@@ -31,7 +31,7 @@ public class ChaserEnemy : MonoBehaviour {
 
   void Movement() {
     rb.velocity = transform.up * speed;
-    
+
     if (followPlayer) {
       Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;

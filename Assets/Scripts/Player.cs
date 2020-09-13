@@ -11,8 +11,8 @@ public class Player : MonoBehaviour {
   public Transform[] spawnLeftShoot;
   public Transform[] spawnRightShoot;
 
-  Rigidbody2D rb;
   int health = 100;
+  Rigidbody2D rb;
   Vector3 healthBarPos;
 
   void Start() {
