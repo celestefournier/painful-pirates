@@ -17,7 +17,8 @@ public class Player : MonoBehaviour {
 
   void Start() {
     rb = GetComponent<Rigidbody2D>();
-    healthBarPos = healthBar.transform.position;
+    healthBarPos = healthBar.transform.localPosition;
+    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   void Update() {
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour {
       );
     }
 
-    healthBar.transform.position = transform.position + healthBarPos;
+    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   void Shoot() {
@@ -60,5 +61,10 @@ public class Player : MonoBehaviour {
     foreach (var rightShoot in spawnRightShoot) {
       Instantiate(bullet, rightShoot.position, transform.rotation * Quaternion.Euler(0, 0, -90));
     }
+  }
+
+  public void SetDamage(int damage) {
+    health -= damage;
+    healthBar.GetComponent<HealthBar>().Health(damage);
   }
 }
