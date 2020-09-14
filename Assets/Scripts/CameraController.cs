@@ -12,7 +12,9 @@ public class CameraController : MonoBehaviour {
   }
 
   void FixedUpdate() {
-    Vector3 smoothedPosition = Vector3.Lerp(transform.position, player.position, smoothSpeed);
-    transform.position = smoothedPosition + zPosition;
+    if (player) {
+      Vector3 smoothedPosition = Vector3.Lerp(transform.position, player.position, smoothSpeed);
+      transform.position = smoothedPosition + zPosition;
+    }
   }
 }

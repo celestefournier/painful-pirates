@@ -1,13 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
-  public GameObject[] enemies;
   public float sessionTime;
   public float spawnTime;
+  public GameObject[] enemies;
+  public Text scoreText;
+  public GameObject gameOverScreen;
 
   Vector2 spawnStart, spawnEnd;
   bool timeOut;
+  int score;
 
   void Start() {
     sessionTime = PlayerPrefs.GetInt("SessionTime");
@@ -20,7 +25,7 @@ public class GameController : MonoBehaviour {
 
   IEnumerator SpawnEnemy() {
     yield return new WaitForSeconds(spawnTime);
-    
+
     while (!timeOut) {
       Vector2 randomPos = new Vector2(
         Random.Range(spawnStart.x, spawnEnd.x),
@@ -46,5 +51,22 @@ public class GameController : MonoBehaviour {
   IEnumerator TimeOut() {
     yield return new WaitForSeconds(sessionTime * 60);
     timeOut = true;
+  }
+
+  public void GameOver() {
+    scoreText.text = score.ToString();
+    gameOverScreen.SetActive(true);
+  }
+
+  public void SetScore() {
+    score++;
+  }
+
+  public void PlayAgain() {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+  }
+
+  public void BackToMenu() {
+    SceneManager.LoadScene("Menu");
   }
 }

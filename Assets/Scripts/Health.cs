@@ -10,11 +10,13 @@ public class Health : MonoBehaviour {
 
   Vector3 healthBarPos;
   SpriteRenderer sprite;
+  GameController gameController;
 
   void Start() {
     sprite = GetComponent<SpriteRenderer>();
     healthBarPos = healthBar.transform.localPosition;
     healthBar.transform.localPosition = transform.localPosition + healthBarPos;
+    gameController = GameObject.Find("GameController").GetComponent<GameController>();
   }
 
   void Update() {
@@ -37,12 +39,16 @@ public class Health : MonoBehaviour {
   }
 
   public void SetDamage(float damage) {
-    print(health / maxHealth);
     health -= damage;
     healthBar.GetComponent<HealthBar>().Health(health / maxHealth);
   }
 
   void Die() {
+    if (gameObject.tag == "Enemy") {
+      gameController.SetScore();
+    } else if (gameObject.tag == "Player") {
+      gameController.GameOver();
+    }
     Instantiate(explosion, transform.position, Quaternion.identity);
     Destroy(transform.parent.gameObject);
   }

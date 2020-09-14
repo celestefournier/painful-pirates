@@ -28,6 +28,10 @@ public class ChaserEnemy : MonoBehaviour {
     rb.velocity = transform.up * speed;
 
     if (followPlayer) {
+      if (!player) {
+        followPlayer = false;
+        return;
+      }
       Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;
       transform.rotation = Quaternion.Euler(0, 0, angle);

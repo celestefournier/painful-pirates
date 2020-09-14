@@ -28,6 +28,11 @@ public class ShooterEnemy : MonoBehaviour {
 
   void Movement() {
     if (followPlayer) {
+      if (!player) {
+        followPlayer = false;
+        return;
+      }
+
       float distance = Vector2.Distance(transform.position, player.position);
 
       if (distance > 3) {
@@ -37,22 +42,6 @@ public class ShooterEnemy : MonoBehaviour {
       Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;
       transform.rotation = Quaternion.Euler(0, 0, angle);
-
-      // if (angle > transform.localEulerAngles.z) {
-      //   Quaternion newPosition = transform.rotation * Quaternion.Euler(0, 0, rotationSpeed * Time.deltaTime);
-      //   // print(newPosition);
-      //   if (angle < newPosition.z) {
-      //     transform.rotation = Quaternion.Euler(0, 0, angle);
-      //   } else {
-      //     transform.rotation = newPosition;
-      //   }
-      // }
-      // else if (angle < transform.localEulerAngles.z) {
-      //   Quaternion newPosition = transform.rotation * Quaternion.Euler(0, 0, rotationSpeed * Time.deltaTime);
-      //   if (angle > newPosition.z) {
-      //     transform.rotation = Quaternion.Euler(0, 0, angle);
-      //   }
-      // }
     }
     else {
       rb.velocity = transform.up * speed;
@@ -80,11 +69,13 @@ public class ShooterEnemy : MonoBehaviour {
 
   IEnumerator Shoot() {
     while (canMove) {
+      if (!player) {
+        yield break;
+      }
       Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;
       GameObject bulletSpawn = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-      bulletSpawn.GetComponent<Bullet>().shooter = gameObject.tag;
-      bulletSpawn.GetComponent<Bullet>().damage = damage;
+      bulletSpawn.GetComponent<Bullet>().Fire(gameObject.tag, damage);
 
       yield return new WaitForSeconds(shootSpeed);
     }

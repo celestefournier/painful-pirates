@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
   public float speed;
-  public float damage;
-  [HideInInspector]
-  public string shooter;
+
+  float damage;
+  string shooter;
 
   void Update() {
     transform.Translate(Vector3.up * speed * Time.deltaTime);
@@ -18,5 +18,10 @@ public class Bullet : MonoBehaviour {
         Destroy(gameObject);
       }
     }
+  }
+
+  public void Fire(string shooter, float damage) {
+    this.shooter = shooter;
+    this.damage = damage;
   }
 }

@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
   public Transform spawnFrontalShoot;
   public Transform[] spawnLeftShoot;
   public Transform[] spawnRightShoot;
+  public GameController gameController;
 
   Rigidbody2D rb;
 
@@ -46,20 +47,21 @@ public class Player : MonoBehaviour {
 
   void FrontalShoot() {
     GameObject bulletSpawn = Instantiate(bullet, spawnFrontalShoot.position, transform.rotation);
-    bulletSpawn.GetComponent<Bullet>().shooter = gameObject.tag;
-    bulletSpawn.GetComponent<Bullet>().damage = damage;
+    bulletSpawn.GetComponent<Bullet>().Fire(gameObject.tag, damage);
   }
 
   void SideShoot() {
     foreach (var leftShoot in spawnLeftShoot) {
       GameObject bulletSpawn = Instantiate(bullet, leftShoot.position, transform.rotation * Quaternion.Euler(0, 0, 90));
-      bulletSpawn.GetComponent<Bullet>().shooter = gameObject.tag;
-      bulletSpawn.GetComponent<Bullet>().damage = damage;
+      bulletSpawn.GetComponent<Bullet>().Fire(gameObject.tag, damage);
     }
     foreach (var rightShoot in spawnRightShoot) {
       GameObject bulletSpawn = Instantiate(bullet, rightShoot.position, transform.rotation * Quaternion.Euler(0, 0, -90));
-      bulletSpawn.GetComponent<Bullet>().shooter = gameObject.tag;
-      bulletSpawn.GetComponent<Bullet>().damage = damage;
+      bulletSpawn.GetComponent<Bullet>().Fire(gameObject.tag, damage);
     }
+  }
+
+  public void SetScore() {
+    gameController.SetScore();
   }
 }
