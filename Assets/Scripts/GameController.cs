@@ -3,19 +3,25 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
   public GameObject[] enemies;
-  public float enemySpawnTime = 4;
+  public float sessionTime;
+  public float spawnTime;
 
   Vector2 spawnStart, spawnEnd;
-  bool timeEnd;
+  bool timeOut;
 
   void Start() {
+    sessionTime = PlayerPrefs.GetInt("SessionTime");
+    spawnTime = PlayerPrefs.GetInt("SpawnTime");
     spawnStart = new Vector2(-13, 11);
     spawnEnd = new Vector2(28, -25);
     StartCoroutine(SpawnEnemy());
+    StartCoroutine(TimeOut());
   }
 
   IEnumerator SpawnEnemy() {
-    while (!timeEnd) {
+    yield return new WaitForSeconds(spawnTime);
+    
+    while (!timeOut) {
       Vector2 randomPos = new Vector2(
         Random.Range(spawnStart.x, spawnEnd.x),
         Random.Range(spawnStart.y, spawnEnd.y)
@@ -33,7 +39,12 @@ public class GameController : MonoBehaviour {
       GameObject enemy = enemies[Random.Range(0, enemies.Length)];
       Instantiate(enemy, randomPos, Quaternion.identity);
 
-      yield return new WaitForSeconds(enemySpawnTime);
+      yield return new WaitForSeconds(spawnTime);
     }
+  }
+
+  IEnumerator TimeOut() {
+    yield return new WaitForSeconds(sessionTime * 60);
+    timeOut = true;
   }
 }
