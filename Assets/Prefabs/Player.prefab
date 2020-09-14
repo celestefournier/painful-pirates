@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 4466337713542062368}
   - component: {fileID: 3752692326414541953}
   - component: {fileID: 7426945073714197862}
+  - component: {fileID: 9072350878480795084}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Player
@@ -287,7 +288,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c969d3283bb0e44eb6d6d5100657bf1, type: 3}
+  m_Sprite: {fileID: -889739676950766307, guid: a3afc3b8f8cf5d34e96e92dc9534c2cc,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
@@ -359,8 +361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   rotationSpeed: 60
+  damage: 10
   bullet: {fileID: 8806333903268268715, guid: 4dd514a5af13f9847907b477a37f0a42, type: 3}
-  healthBar: {fileID: 6624841607731978663}
   playerGroup: {fileID: 2026415419448301478}
   spawnFrontalShoot: {fileID: 6081607243957712208}
   spawnLeftShoot:
@@ -371,6 +373,23 @@ MonoBehaviour:
   - {fileID: 1462501537341891012}
   - {fileID: 1430342224599756458}
   - {fileID: 2693883040728854581}
+--- !u!114 &9072350878480795084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426945073714197861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add8c87b9e1742642a5c36af72c93ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
+  healthBar: {fileID: 6624841607731978663}
+  explosion: {fileID: 3601370710570307794, guid: f75981f1ae93db34b9f201e24126875c,
+    type: 3}
 --- !u!1 &8327441562415020395
 GameObject:
   m_ObjectHideFlags: 0

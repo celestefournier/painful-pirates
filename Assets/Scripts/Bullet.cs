@@ -3,8 +3,20 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
   public float speed;
+  public float damage;
+  [HideInInspector]
+  public string shooter;
 
   void Update() {
     transform.Translate(Vector3.up * speed * Time.deltaTime);
+  }
+
+  void OnTriggerEnter2D(Collider2D other) {
+    if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy") {
+      if (other.gameObject.tag != shooter && !other.isTrigger) {
+        other.gameObject.GetComponent<Health>().SetDamage(damage);
+        Destroy(gameObject);
+      }
+    }
   }
 }

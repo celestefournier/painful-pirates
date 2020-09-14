@@ -46,9 +46,10 @@ GameObject:
   - component: {fileID: 3543598891594555114}
   - component: {fileID: 702912399602165536}
   - component: {fileID: 6379791379029776174}
+  - component: {fileID: 3486830141472508901}
   m_Layer: 0
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +181,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.5
 --- !u!114 &6379791379029776174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,10 +194,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa5695db45f4124f8a66840a676438f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
   speed: 1.5
   rotationSpeed: 60
-  canMove: 1
-  damage: 60
+  damage: 50
+  explosion: {fileID: 3601370710570307794, guid: f75981f1ae93db34b9f201e24126875c,
+    type: 3}
+--- !u!114 &3486830141472508901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543598891594555112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add8c87b9e1742642a5c36af72c93ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
   health: 30
   healthBar: {fileID: 5664273373413708545}
   explosion: {fileID: 3601370710570307794, guid: f75981f1ae93db34b9f201e24126875c,

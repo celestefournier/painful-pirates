@@ -6,21 +6,18 @@ public class ShooterEnemy : MonoBehaviour {
   public float speed = 1.5f;
   public float shootSpeed = 1;
   public float rotationSpeed = 60;
-  public GameObject healthBar;
+  public float damage = 10;
   public GameObject bullet;
 
   Rigidbody2D rb;
   Transform player;
   Coroutine shootCoroutine;
   Vector3 rotatePosition;
-  Vector3 healthBarPos;
   bool followPlayer;
 
   void Start() {
     rb = GetComponent<Rigidbody2D>();
     StartCoroutine(RandomRotate());
-    healthBarPos = healthBar.transform.localPosition;
-    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   void Update() {
@@ -40,13 +37,27 @@ public class ShooterEnemy : MonoBehaviour {
       Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;
       transform.rotation = Quaternion.Euler(0, 0, angle);
+
+      // if (angle > transform.localEulerAngles.z) {
+      //   Quaternion newPosition = transform.rotation * Quaternion.Euler(0, 0, rotationSpeed * Time.deltaTime);
+      //   // print(newPosition);
+      //   if (angle < newPosition.z) {
+      //     transform.rotation = Quaternion.Euler(0, 0, angle);
+      //   } else {
+      //     transform.rotation = newPosition;
+      //   }
+      // }
+      // else if (angle < transform.localEulerAngles.z) {
+      //   Quaternion newPosition = transform.rotation * Quaternion.Euler(0, 0, rotationSpeed * Time.deltaTime);
+      //   if (angle > newPosition.z) {
+      //     transform.rotation = Quaternion.Euler(0, 0, angle);
+      //   }
+      // }
     }
     else {
       rb.velocity = transform.up * speed;
       transform.Rotate(rotatePosition * rotationSpeed * Time.deltaTime, Space.World);
     }
-
-    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   IEnumerator RandomRotate() {
@@ -71,7 +82,9 @@ public class ShooterEnemy : MonoBehaviour {
     while (canMove) {
       Vector2 diff = transform.position - player.position;
       float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg + 90;
-      Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+      GameObject bulletSpawn = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+      bulletSpawn.GetComponent<Bullet>().shooter = gameObject.tag;
+      bulletSpawn.GetComponent<Bullet>().damage = damage;
 
       yield return new WaitForSeconds(shootSpeed);
     }

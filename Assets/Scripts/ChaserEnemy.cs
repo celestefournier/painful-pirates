@@ -5,22 +5,17 @@ public class ChaserEnemy : MonoBehaviour {
   public bool canMove = true;
   public float speed = 1.5f;
   public float rotationSpeed = 60;
-  public int damage = 60;
-  public int health = 30;
-  public GameObject healthBar;
+  public int damage = 50;
   public GameObject explosion;
 
   Rigidbody2D rb;
   Transform player;
   Vector3 rotatePosition;
-  Vector3 healthBarPos;
   bool followPlayer;
 
   void Start() {
     rb = GetComponent<Rigidbody2D>();
     StartCoroutine(RandomRotate());
-    healthBarPos = healthBar.transform.localPosition;
-    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   void Update() {
@@ -40,8 +35,6 @@ public class ChaserEnemy : MonoBehaviour {
     else {
       transform.Rotate(rotatePosition * rotationSpeed * Time.deltaTime, Space.World);
     }
-
-    healthBar.transform.localPosition = transform.localPosition + healthBarPos;
   }
 
   IEnumerator RandomRotate() {
@@ -62,11 +55,6 @@ public class ChaserEnemy : MonoBehaviour {
     }
   }
 
-  public void SetDamage(int damage) {
-    health -= damage;
-    healthBar.GetComponent<HealthBar>().Health(damage);
-  }
-
   void OnTriggerEnter2D(Collider2D other) {
     if (other.gameObject.tag == "Player") {
       player = other.gameObject.transform;
@@ -83,9 +71,8 @@ public class ChaserEnemy : MonoBehaviour {
 
   void OnCollisionEnter2D(Collision2D other) {
     if (other.gameObject.tag == "Player") {
-      other.gameObject.GetComponent<Player>().SetDamage(damage);
-      Instantiate(explosion, transform.position, Quaternion.identity);
-      Destroy(transform.parent.gameObject);
+      other.gameObject.GetComponent<Health>().SetDamage(damage);
+      GetComponent<Health>().health = 0;
     }
   }
 }
