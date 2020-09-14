@@ -390,6 +390,10 @@ MonoBehaviour:
   healthBar: {fileID: 6624841607731978663}
   explosion: {fileID: 3601370710570307794, guid: f75981f1ae93db34b9f201e24126875c,
     type: 3}
+  shipStages:
+  - {fileID: -889739676950766307, guid: a3afc3b8f8cf5d34e96e92dc9534c2cc, type: 3}
+  - {fileID: -5998797548565674896, guid: a3afc3b8f8cf5d34e96e92dc9534c2cc, type: 3}
+  - {fileID: -1378952643527606749, guid: a3afc3b8f8cf5d34e96e92dc9534c2cc, type: 3}
 --- !u!1 &8327441562415020395
 GameObject:
   m_ObjectHideFlags: 0

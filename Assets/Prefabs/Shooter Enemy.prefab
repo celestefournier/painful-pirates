@@ -216,6 +216,10 @@ MonoBehaviour:
   healthBar: {fileID: 3884933393729514437}
   explosion: {fileID: 3601370710570307794, guid: f75981f1ae93db34b9f201e24126875c,
     type: 3}
+  shipStages:
+  - {fileID: 661413570170886605, guid: 031285afd47d5214d80d5b6640bd6d93, type: 3}
+  - {fileID: -7839800459299541198, guid: 031285afd47d5214d80d5b6640bd6d93, type: 3}
+  - {fileID: 8346076307250251635, guid: 031285afd47d5214d80d5b6640bd6d93, type: 3}
 --- !u!1001 &6603756922594662396
 PrefabInstance:
   m_ObjectHideFlags: 0
